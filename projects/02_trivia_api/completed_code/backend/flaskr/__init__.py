@@ -163,14 +163,14 @@ def create_app(env='PROD'):
       }), 422
 
   @app.errorhandler(405)
-  def unprocessable(error):
+  def not_allowed(error):
     return jsonify({
       "success": False,
       "message": "method not allowed"
       }), 405
 
   @app.errorhandler(500)
-  def unprocessable(error):
+  def internal_error(error):
     return jsonify({
       "success": False,
       "message": "Internal Server Error"
