@@ -159,6 +159,7 @@ def create_app(env='PROD'):
   def unprocessable(error):
     return jsonify({
       "success": False,
+      "error": 422,
       "message": "unprocessable"
       }), 422
 
@@ -166,6 +167,7 @@ def create_app(env='PROD'):
   def not_allowed(error):
     return jsonify({
       "success": False,
+      "error": 405,
       "message": "method not allowed"
       }), 405
 
@@ -173,6 +175,7 @@ def create_app(env='PROD'):
   def internal_error(error):
     return jsonify({
       "success": False,
+      "error": 500,
       "message": "Internal Server Error"
       }), 500
 
