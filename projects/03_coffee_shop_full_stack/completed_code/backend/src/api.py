@@ -1,5 +1,5 @@
-#import sys
-#sys.path.insert(0, '..')
+# import sys
+# sys.path.insert(0, '..')
 
 from flask import Flask, request, jsonify, abort
 from flask_migrate import Migrate
@@ -18,8 +18,10 @@ CORS(app)
 
 @app.after_request
 def after_request(response):
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE')
+    response.headers.add('Access-Control-Allow-Headers',
+                         'Content-Type, Authorization')
+    response.headers.add('Access-Control-Allow-Methods',
+                         'GET, POST, PATCH, DELETE')
     return response
 
 
@@ -72,7 +74,7 @@ def create_drink(payload):
             "drinks": drink.long()
         })
 
-    except:
+    except Exception as e:
         abort(422)
 
 
@@ -157,6 +159,7 @@ def not_allowed(error):
         "message": "method not allowed"
       }), 405
 
+
 @app.errorhandler(500)
 def internal_error(error):
     return jsonify({
@@ -175,5 +178,5 @@ def auth_error(error):
       }), error.status_code
 
 
-#if __name__ == '__main__':
+# if __name__ == '__main__':
 #    app.run(debug=True, use_reloader=False)
