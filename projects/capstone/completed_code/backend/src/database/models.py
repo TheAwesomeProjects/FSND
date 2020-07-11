@@ -1,8 +1,11 @@
+import os
 from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, UniqueConstraint
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
 
-database_name = "hilltop"
-database_path = "postgres://{}/{}".format('localhost:5432', database_name)
+# get env variables
+load_dotenv()
+database_path = os.getenv("DATABASE_URL")
 
 db = SQLAlchemy()
 

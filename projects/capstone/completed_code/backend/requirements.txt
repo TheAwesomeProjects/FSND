@@ -3,6 +3,8 @@ Flask-SQLAlchemy
 SQLAlchemy
 Flask-Cors
 Flask-Migrate
+flask_script
 python-jose-cryptodome
 psycopg2-binary
 python-dotenv
+gunicorn

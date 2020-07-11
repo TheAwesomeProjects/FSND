@@ -9,7 +9,6 @@ from .database.models import setup_db, db, Tea, Catalog, Order, Client, Admin, C
 from .auth.auth import requires_auth, AuthError
 
 
-
 def create_app(env='PROD'):
     # create and configure the app
     app = Flask(__name__)
@@ -679,6 +678,8 @@ def create_app(env='PROD'):
 
     return app
 
+
+app = create_app()
 
 # if __name__ == '__main__':
 #        app = create_app(env='DEV')
