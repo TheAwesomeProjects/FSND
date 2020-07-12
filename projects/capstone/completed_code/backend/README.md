@@ -59,13 +59,21 @@ The `--reload` flag will detect file changes and restart the server automaticall
 
 
 ## Testing
-To run the tests, execute:
+To run the tests, first create hilltop_test DB and load test data:
 ```
 dropdb hilltop_test
 createdb hilltop_test
 psql hilltop_test < hilltop_test.sql
+```
+
+then run tests by executing:
+
+```
 python test_api.py
 ```
+
+or using Postman, importing test collection `hilltop_test.postman_collection.json`
+
 
 ## Setup authentication
 

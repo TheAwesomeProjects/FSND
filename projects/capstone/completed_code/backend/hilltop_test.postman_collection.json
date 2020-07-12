@@ -1,0 +1,4074 @@
+{
+	"info": {
+		"_postman_id": "ef7b0860-d6b0-4c05-a9f5-7016146fea83",
+		"name": "hilltop_test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "public",
+			"item": [
+				{
+					"name": "get_tea",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91afc3bb-be4e-4cdb-b62a-346fbb1d2d72",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains tea array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.tea_list).to.be.an('array')",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key total_positions\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_positions\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/tea",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_catalog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bcd53057-333f-46f8-a29c-d7d3d0627cec",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains catalog array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.catalog).to.be.an('array')",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key total_catalog_positions\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_catalog_positions\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/catalog",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"catalog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_company_contacts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c898be93-58f9-443f-8e4c-800377d492e9",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains company_contacts array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.company_contacts).to.be.an('array')",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key total_company_contacts\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_company_contacts\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/company_contacts",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"company_contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401_create_tea_not_authorized",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e5ff1983-c431-41f1-af03-d3c0a4390c5c",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/tea",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401_update_tea_not_authorized",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ff129e78-2bb1-469a-885c-698d22c35686",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/tea/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tea",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "401_delete_tea_not_authorized",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "29eba1e5-961e-481e-98cd-011c06b89fbf",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/tea/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tea",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e5ec46fe-f84c-4f9e-b61b-5f052f90ae61",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c42a1a9b-9c91-49d6-a236-5b14574e9709",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "get_tea",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f254e7d5-ed0f-4573-8066-81f1658b2691",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains tea array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.tea_list).to.be.an('array')",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key total_positions\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_positions\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/tea",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_tea",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dee76991-00f3-4c51-b6ba-2abbd26107d6",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key created\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"created\");",
+									"});",
+									"",
+									"pm.test(\"response contains key total_positions\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_positions\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Hilltop Classic Black Tea\",\n    \"tea_type\": \"Black Tea\",\n    \"code\": \"0004\",\n    \"packaging\": \"100g\",\n    \"price\": \"1.90\",\n    \"description\": \"Classic Ceylon Tea\",\n    \"ingredients\": \"Ceylon Tea leaves\",\n    \"instruction\": \"Boil it, drink it\",\n    \"tea_quantity\": 1000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/tea",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "422_create_tea_not_valid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c9ff273d-9e41-4b06-a4c2-a117ac6b37b7",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'unprocessable'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"unprocessable\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": null,\n    \"tea_type\": null,\n    \"code\": null,\n    \"packaging\": null,\n    \"price\": null,\n    \"description\": null,\n    \"ingredients\": null,\n    \"instruction\": null,\n    \"tea_quantity\": null\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/tea",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "405_create_tea_not_allowed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "54bb8875-9177-4740-b331-c1036b551eb3",
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'method not allowed'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"method not allowed\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Hilltop Classic Black Tea\",\n    \"tea_type\": \"Black Tea\",\n    \"code\": \"0004\",\n    \"packaging\": \"100g\",\n    \"price\": \"1.90\",\n    \"description\": \"Classic Ceylon Tea\",\n    \"ingredients\": \"Ceylon Tea leaves\",\n    \"instruction\": \"Boil it, drink it\",\n    \"tea_quantity\": 1000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/tea/100500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tea",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch_tea",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "444add70-2b5a-4c7a-84e0-0ed35e344cc3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key updated\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"updated\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Hilltop English Breakfast Black Tea\",\n    \"tea_type\": \"Black Tea\",\n    \"code\": \"0004\",\n    \"packaging\": \"200g\",\n    \"price\": \"2.90\",\n    \"description\": \"English Breakfast Ceylon Tea\",\n    \"ingredients\": \"Ceylon Tea leaves\",\n    \"instruction\": \"Boil it, drink it\",\n    \"tea_quantity\": 2000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/tea/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tea",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04_patch_tea_not_found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "756f036c-c2bc-4fa9-a1ee-247850984f2e",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'resource not found'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"resource not found\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Hilltop English Breakfast Black Tea\",\n    \"tea_type\": \"Black Tea\",\n    \"code\": \"0004\",\n    \"packaging\": \"200g\",\n    \"price\": \"2.90\",\n    \"description\": \"English Breakfast Ceylon Tea\",\n    \"ingredients\": \"Ceylon Tea leaves\",\n    \"instruction\": \"Boil it, drink it\",\n    \"tea_quantity\": 2000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/tea/100500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tea",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "422_patch_tea_not_valid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ff8588ac-0470-4c7f-b7d0-0b57161364ce",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'unprocessable'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"unprocessable\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": null,\n    \"tea_type\": null,\n    \"code\": null,\n    \"packaging\": null,\n    \"price\": null,\n    \"description\": null,\n    \"ingredients\": null,\n    \"instruction\": null,\n    \"tea_quantity\": null\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/tea/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tea",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_tea",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2448dbe3-61cc-425f-a962-8459ad7c42b0",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"id of deleted row  == 3\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.deleted).to.eql('3');",
+									"});",
+									"",
+									"pm.test(\"response contains key total_positions\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_positions\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/tea/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tea",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "404_delete_tea_not_found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91dfd3aa-1582-40f8-bc4f-f84aa2d167fd",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'resource not found'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"resource not found\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/tea/100500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tea",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_catalog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d5a3a380-f0f8-48e5-8bf3-767778afa17a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains catalog array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.catalog).to.be.an('array')",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key total_catalog_positions\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_catalog_positions\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/catalog",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"catalog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_catalog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "10ee648a-dc99-4d81-aba5-ef0c4d47866a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key created\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"created\");",
+									"});",
+									"",
+									"pm.test(\"response contains key total_catalog_positions\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_catalog_positions\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tea_category\": \"Green Tea\",\n    \"tea_packing\": \"100g\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/catalog",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"catalog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "422_create_catalog_not_valid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ed478cb7-5263-4082-83f7-dfbc81157362",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'unprocessable'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"unprocessable\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tea_category\": null,\n    \"tea_packing\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/catalog",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"catalog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "405_create_catalog_not_allowed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "853ee9db-014b-4b37-a3eb-907f6c89b465",
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'method not allowed'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"method not allowed\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tea_category\": \"Green Tea\",\n    \"tea_packing\": \"100g\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/catalog/100500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"catalog",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch_catalog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e038cf56-ae2a-4ada-bb4a-fb24dad4ea75",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key updated\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"updated\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tea_category\": \"Green Fruit Tea\",\n    \"tea_packing\": \"200g\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/catalog/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"catalog",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "404_patch_catalog_not_found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "575e673a-369b-44aa-ad90-bd14445bca1b",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'resource not found'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"resource not found\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tea_category\": \"Green Fruit Tea\",\n    \"tea_packing\": \"200g\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/catalog/100500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"catalog",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "422_patch_catalog_not_valid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "026c5f8e-a028-44f5-84ce-439b46fea3cd",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'unprocessable'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"unprocessable\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tea_category\": null,\n    \"tea_packing\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/catalog/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"catalog",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_catalog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "877229ce-e268-41aa-b741-6a847cbb64a0",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"id of deleted row  == 4\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.deleted).to.eql('4');",
+									"});",
+									"",
+									"pm.test(\"response contains key total_catalog_positions\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_catalog_positions\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/catalog/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"catalog",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "404_delete_catalog_not_found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "abd0483f-b3ff-41fe-b2a8-5569a5747344",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'resource not found'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"resource not found\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/catalog/100500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"catalog",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "214e6222-742f-4dee-94ab-b21a5137898e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains orders array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.orders).to.be.an('array')",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key total_orders\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_orders\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/order",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "186d3b44-ed24-4625-9b99-dcd8afaef51a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key created\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"created\");",
+									"});",
+									"",
+									"pm.test(\"response contains key total_orders\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_orders\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tea_id\": 2,\n    \"price\": \"2.70\",\n    \"quantity\": 100,\n    \"total_price\": \"270\",\n    \"client_id\": 2,\n    \"status\": \"In Progress\",\n    \"created_date\": \"Mon, 09 Jul 2020 19:30:00 GMT\",\n    \"delivered_date\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/order",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "422_create_order_not_valid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2fa30456-3948-4a48-b977-83bedf57a07c",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'unprocessable'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"unprocessable\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tea_id\": null,\n    \"price\": null,\n    \"quantity\": null,\n    \"total_price\": null,\n    \"client_id\": null,\n    \"status\": null,\n    \"created_date\": null,\n    \"delivered_date\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/order",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "405_create_order_not_allowed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9c4bbffa-2afd-4ddb-8ddf-7120d7e4e67a",
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'method not allowed'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"method not allowed\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tea_id\": 2,\n    \"price\": \"2.70\",\n    \"quantity\": 100,\n    \"total_price\": \"270\",\n    \"client_id\": 2,\n    \"status\": \"In Progress\",\n    \"created_date\": \"Mon, 09 Jul 2020 19:30:00 GMT\",\n    \"delivered_date\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/order/100500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch_order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "547477e8-8e0d-4080-988b-698d39156528",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key updated\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"updated\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tea_id\": 1,\n    \"price\": \"2.50\",\n    \"quantity\": 1,\n    \"total_price\": \"2.50\",\n    \"client_id\": 2,\n    \"status\": \"Completed\",\n    \"created_date\": \"Mon, 08 Jul 2020 19:30:00 GMT\",\n    \"delivered_date\": \"Mon, 09 Jul 2020 19:30:00 GMT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/order/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "404_patch_order_not_found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "19f91269-b390-4bfc-addd-1f488e655488",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'resource not found'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"resource not found\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tea_id\": 1,\n    \"price\": \"2.50\",\n    \"quantity\": 1,\n    \"total_price\": \"2.50\",\n    \"client_id\": 2,\n    \"status\": \"Completed\",\n    \"created_date\": \"Mon, 08 Jul 2020 19:30:00 GMT\",\n    \"delivered_date\": \"Mon, 09 Jul 2020 19:30:00 GMT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/order/100500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "422_patch_order_not_valid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "075c8be6-ac73-4c52-b82a-a57aec053a8e",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'unprocessable'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"unprocessable\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tea_id\": null,\n    \"price\": null,\n    \"quantity\": null,\n    \"total_price\": null,\n    \"client_id\": null,\n    \"status\": null,\n    \"created_date\": null,\n    \"delivered_date\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/order/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "885c3b22-0978-4ec4-b7a7-3c5b5c647010",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"id of deleted row  == 4\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.deleted).to.eql('4');",
+									"});",
+									"",
+									"pm.test(\"response contains key total_orders\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_orders\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/order/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "404_delete_order_not_found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c6cee679-05db-403a-8b7b-e0df8740b23b",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'resource not found'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"resource not found\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/order/100500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "37f468b4-1110-4ada-a197-60d12898e5d6",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains clients array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.clients).to.be.an('array')",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key total_clients\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_clients\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/client",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2175978f-28ee-4040-bb17-1ebf020d37a1",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key created\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"created\");",
+									"});",
+									"",
+									"pm.test(\"response contains key total_clients\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_clients\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John\",\n    \"surname\": \"Snow\",\n    \"email\": \"john.snow@gmail.com\",\n    \"phone\": \"+371 21112233\",\n    \"address\": \"Snow street 50 - 99\",\n    \"city\": \"Wall Town\",\n    \"country\": \"Winterfell\",\n    \"postal_code\": \"W-001\",\n    \"discount\": 50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/client",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "422_create_client_not_valid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5593ce4f-792c-4b5c-9756-3d437d0d65d9",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'unprocessable'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"unprocessable\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": null,\n    \"surname\": null,\n    \"email\": null,\n    \"phone\": null,\n    \"address\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postal_code\": null,\n    \"discount\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/client",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "405_create_client_not_allowed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d88bbe9-f906-4312-9c03-2edbd33ba11c",
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'method not allowed'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"method not allowed\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John\",\n    \"surname\": \"Snow\",\n    \"email\": \"john.snow@gmail.com\",\n    \"phone\": \"+371 21112233\",\n    \"address\": \"Snow street 50 - 99\",\n    \"city\": \"Wall Town\",\n    \"country\": \"Winterfell\",\n    \"postal_code\": \"W-001\",\n    \"discount\": 50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/client/100500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"client",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch_client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fc04bd40-7d30-4dd2-9bd6-4a7bda788ee3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key updated\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"updated\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John\",\n    \"surname\": \"Snow\",\n    \"email\": \"john.snow@gmail.com\",\n    \"phone\": \"+371 21112233\",\n    \"address\": \"Snow street 42 - 87\",\n    \"city\": \"Wall Town\",\n    \"country\": \"Winterfell\",\n    \"postal_code\": \"W-001\",\n    \"discount\": 90\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/client/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "404_patch_client_not_found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "457e73d9-6fa0-4b07-90ee-30c04e13a979",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'resource not found'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"resource not found\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John\",\n    \"surname\": \"Snow\",\n    \"email\": \"john.snow@gmail.com\",\n    \"phone\": \"+371 21112233\",\n    \"address\": \"Snow street 42 - 87\",\n    \"city\": \"Wall Town\",\n    \"country\": \"Winterfell\",\n    \"postal_code\": \"W-001\",\n    \"discount\": 90\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/client/100500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"client",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "422_patch_client_not_valid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e01c95a2-b852-455e-8925-0e51b4d9b5ef",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'unprocessable'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"unprocessable\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": null,\n    \"surname\": null,\n    \"email\": null,\n    \"phone\": null,\n    \"address\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postal_code\": null,\n    \"discount\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/client/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "53fc053c-20da-4efa-a874-6331ddfb5793",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"id of deleted row  == 3\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.deleted).to.eql('3');",
+									"});",
+									"",
+									"pm.test(\"response contains key total_clients\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_clients\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/client/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"client",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "404_delete_client_not_found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1653e55b-c706-4ca4-a4d2-7014b4dca053",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'resource not found'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"resource not found\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/client/100500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"client",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "86d5ee68-d90e-4117-849b-357ed0380166",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains admins array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.admins).to.be.an('array')",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key total_admins\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_admins\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/admin",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "aeadbf46-5811-4cdb-83a0-36cc05424ae0",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key created\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"created\");",
+									"});",
+									"",
+									"pm.test(\"response contains key total_admins\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_admins\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Cersei\",\n    \"surname\": \"Lannister\",\n    \"email\": \"cersei.lannister@gmail.com\",\n    \"phone\": \"+371 43920134\",\n    \"address\": \"Casterly Rock street 11 - 191\",\n    \"city\": \"Casterly Rock\",\n    \"country\": \"Westeros\",\n    \"postal_code\": \"WC-001\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/admin",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "422_create_admin_not_valid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9531035b-d7ac-4878-8d97-4c6df72b5221",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'unprocessable'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"unprocessable\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": null,\n    \"surname\": null,\n    \"email\": null,\n    \"phone\": null,\n    \"address\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postal_code\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/admin",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "405_create_admin_not_allowed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d312935-3ed4-4882-a5a6-660664a8dc92",
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'method not allowed'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"method not allowed\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Cersei\",\n    \"surname\": \"Lannister\",\n    \"email\": \"cersei.lannister@gmail.com\",\n    \"phone\": \"+371 43920134\",\n    \"address\": \"Casterly Rock street 11 - 191\",\n    \"city\": \"Casterly Rock\",\n    \"country\": \"Westeros\",\n    \"postal_code\": \"WC-001\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/admin/100500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"admin",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch_admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0b2f5de1-3c5d-4fc4-93b1-57fac2542cbb",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key updated\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"updated\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John\",\n    \"surname\": \"Snow\",\n    \"email\": \"john.snow@gmail.com\",\n    \"phone\": \"+371 21112233\",\n    \"address\": \"Snow street 42 - 87\",\n    \"city\": \"Wall Town\",\n    \"country\": \"Winterfell\",\n    \"postal_code\": \"W-001\",\n    \"discount\": 90\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/admin/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"admin",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "404_patch_admin_not_found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9e6f0f58-aa02-4e29-b35b-07091d93c478",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'resource not found'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"resource not found\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John\",\n    \"surname\": \"Snow\",\n    \"email\": \"john.snow@gmail.com\",\n    \"phone\": \"+371 21112233\",\n    \"address\": \"Snow street 42 - 87\",\n    \"city\": \"Wall Town\",\n    \"country\": \"Winterfell\",\n    \"postal_code\": \"W-001\",\n    \"discount\": 90\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/admin/100500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"admin",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "422_patch_admin_not_valid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "41dcd2cc-e31d-4d54-a54e-f9cf382c06f0",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'unprocessable'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"unprocessable\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": null,\n    \"surname\": null,\n    \"email\": null,\n    \"phone\": null,\n    \"address\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postal_code\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/admin/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"admin",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2cfc6c4f-9d7c-49f3-8d17-67d12e8dcdac",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"id of deleted row  == 2\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.deleted).to.eql('2');",
+									"});",
+									"",
+									"pm.test(\"response contains key total_admins\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_admins\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/admin/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"admin",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "404_delete_admin_not_found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d09e9af8-3eed-47e1-9895-b81a0d3dd58f",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'resource not found'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"resource not found\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/admin/100500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"admin",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_company_contacts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3c212def-6d42-47fc-8554-f1a7c00391c4",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains company_contacts array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.company_contacts).to.be.an('array')",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key total_company_contacts\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_company_contacts\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/company_contacts",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"company_contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_company_contacts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "742ac8ce-4476-490f-bcdf-9f5a91b7e8ed",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key created\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"created\");",
+									"});",
+									"",
+									"pm.test(\"response contains key total_company_contacts\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_company_contacts\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"email\": \"noreply@gmail.com\",\n    \"requisites\": \"LVHABA9002320023230023243\",\n    \"phone\": \"+399 609090909\",\n    \"description\": \"Auto-reply email. Hilltop - tea company serving finest tea in the world\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/company_contacts",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"company_contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "422_create_company_contacts_not_valid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "59a5b594-3ef8-4647-90cd-73b7911612d1",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'unprocessable'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"unprocessable\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": null,\n    \"requisites\": null,\n    \"phone\": null,\n    \"description\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/company_contacts",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"company_contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "405_create_company_contacts_not_allowed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "997ddfeb-ed4a-4e04-8dee-0d32014d23d2",
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {",
+									"    pm.response.to.have.status(405);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'method not allowed'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"method not allowed\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"noreply@gmail.com\",\n    \"requisites\": \"LVHABA9002320023230023243\",\n    \"phone\": \"+399 609090909\",\n    \"description\": \"Auto-reply email. Hilltop - tea company serving finest tea in the world\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/company_contacts/100500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"company_contacts",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch_company_contacts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8250f1b5-fcea-497b-b2fe-4ba1565a702a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key updated\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"updated\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"autoreply@gmail.com\",\n    \"requisites\": \"LVHABA9002320023230023243\",\n    \"phone\": \"+399 609090909\",\n    \"description\": \"Auto-reply email. Hilltop - tea company serving finest tea in the world\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/company_contacts/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"company_contacts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "404_patch_company_contacts not_found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b34ae631-5af9-41e6-a493-6092216fadd6",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'resource not found'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"resource not found\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"autoreply@gmail.com\",\n    \"requisites\": \"LVHABA9002320023230023243\",\n    \"phone\": \"+399 609090909\",\n    \"description\": \"Auto-reply email. Hilltop - tea company serving finest tea in the world\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/company_contacts/100500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"company_contacts",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "422_patch_company_contacts not_valid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "454a06f6-8c98-4484-afd2-301eaf8f13b6",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'unprocessable'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"unprocessable\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": null,\n    \"requisites\": null,\n    \"phone\": null,\n    \"description\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/company_contacts/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"company_contacts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_company_contacts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "07428d70-1d7b-4caf-9c8b-cdd4df9414b4",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"id of deleted row  == 2\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.deleted).to.eql('2');",
+									"});",
+									"",
+									"pm.test(\"response contains key total_company_contacts\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_company_contacts\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/company_contacts/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"company_contacts",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "404_delete_company_contacts_not_found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "510a2ae7-10e6-46c1-8226-ca2f99dd55e7",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'resource not found'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"resource not found\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/company_contacts/100500",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"company_contacts",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im9LSjBEVXRkcmQtbi0zcGpoRjJLViJ9.eyJpc3MiOiJodHRwczovL2F3ZXNvbWUtYXV0aC5ldS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWVkZDE0NTdhMTFjN2YwMDFhMTc4ZjZlIiwiYXVkIjoiaGlsbHRvcCIsImlhdCI6MTU5NDU5MzY1MCwiZXhwIjoxNTk0NjgwMDUwLCJhenAiOiJMZkxsV3pmYnpiaVRmYjRyM3NVY3JCNjZOMjUycFd5ZiIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGV0ZWxlOmFkbWluIiwiZGV0ZWxlOmNhdGFsb2ciLCJkZXRlbGU6Y2xpZW50IiwiZGV0ZWxlOmNvbXBhbnlfY29udGFjdHMiLCJkZXRlbGU6b3JkZXIiLCJkZXRlbGU6dGVhIiwiZ2V0OmFkbWluIiwiZ2V0OmNsaWVudCIsImdldDpvcmRlciIsInBhdGNoOmFkbWluIiwicGF0Y2g6Y2F0YWxvZyIsInBhdGNoOmNsaWVudCIsInBhdGNoOmNvbXBhbnlfY29udGFjdHMiLCJwYXRjaDpvcmRlciIsInBhdGNoOnRlYSIsInBvc3Q6YWRtaW4iLCJwb3N0OmNhdGFsb2ciLCJwb3N0OmNsaWVudCIsInBvc3Q6Y29tcGFueV9jb250YWN0cyIsInBvc3Q6b3JkZXIiLCJwb3N0OnRlYSJdfQ.j9P5NwJB8UFpTP41AHeyaeQxW2gtBQiUMvH5nRSUfqx8MLSFsNu1mWkcg4hF1uN2kDt3Zdggf2VwoDnCVW6saX6dXx42Tlh0m8zZgAH0kSfy7s5s_lnrpW9k_LP7VXa_XjPAxzVHd-r5VV1MO_dms1AChTOtv0RbiPzoi0SV5vm1XqKbzGVzI97q6PCamGJZCVzFqSfUPwvuFYMCYcuQ1zrHxkMcCEv5hgOFtX4XJc9ggb-nbx8__F5CrLumJJay3HI5AAkQYgX_0cEvYadslwZ_HPtZpyyDj5CMdyZmN_OBRqgAduribOyH_Wf-WrnT2-2n643sqWMDxu1iKQYosQ",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c010402c-73b4-46fa-b3f0-db0d3e888c2e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "0ffc1751-78ef-4a46-ad4e-7c6742995ffc",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "client",
+			"item": [
+				{
+					"name": "get_tea",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a77dbf47-daf9-48b4-b257-56c368baebc3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains tea array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.tea_list).to.be.an('array')",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key total_positions\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_positions\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/tea",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_create_tea_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4162d05c-f838-4b99-8c2b-f89907ec369c",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/tea",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_update_tea_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e9a2be80-f4d1-4478-a0d6-e76297e7e2a6",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/tea/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tea",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_delete_tea_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fb1d182c-63fc-4f29-bbf4-ab695f1e7d76",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/tea/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tea",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_catalog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "84d01f8e-63a7-497c-b082-10a7762e9e63",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains catalog array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.catalog).to.be.an('array')",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key total_catalog_positions\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_catalog_positions\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/catalog",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"catalog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_create_catalog_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f966a2a8-638b-4621-a83c-cfb9cf8864a0",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/catalog",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"catalog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_update_catalog_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cbb35e8c-87af-4a58-8f48-8b5a93f98263",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/catalog/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"catalog",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_delete_catalog_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a59a94c7-7f02-44a4-b728-97ec73a8b9c1",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/catalog/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"catalog",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "217ff710-2fb7-41c7-9d99-05df8b051558",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains orders array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.orders).to.be.an('array')",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key total_orders\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_orders\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/order",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "075a27a9-35d9-4996-b61e-4fb73a9b65a6",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key created\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"created\");",
+									"});",
+									"",
+									"pm.test(\"response contains key total_orders\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_orders\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tea_id\": 2,\n    \"price\": \"2.70\",\n    \"quantity\": 100,\n    \"total_price\": \"270\",\n    \"client_id\": 2,\n    \"status\": \"In Progress\",\n    \"created_date\": \"Mon, 09 Jul 2020 19:30:00 GMT\",\n    \"delivered_date\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/order",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_update_order_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "92d3477c-17c1-4b10-8b96-7a532ce2e314",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/order/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_delete_order_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d2f1ee84-1709-4e8f-aeb4-bd90371259e7",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/order/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_company_contacts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dacf4d92-f0dc-4f37-80ea-5a48d119a9f2",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains company_contacts array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.company_contacts).to.be.an('array')",
+									"});",
+									"",
+									"pm.test(\"response contains success == True\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"response contains key total_company_contacts\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"total_company_contacts\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/company_contacts",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"company_contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_create_company_contacts_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ebda35de-54e2-476d-9b4a-8328ad639b4a",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/company_contacts",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"company_contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_update_company_contacts_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d73ac1e5-f29b-4983-80b3-ad6f48afa892",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/company_contacts/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"company_contacts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_delete_company_contacts_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2276a46e-a27e-436f-9dc9-bc0738201542",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/company_contacts/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"company_contacts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_get_client_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c040c1bc-6056-491f-8eb8-03776ac06306",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/client",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_create_client_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "73a9149c-31ae-40f8-9211-94e53f48a0d3",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/client",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_update_client_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "79b2cbb4-1f4f-40a8-8f8e-3adc13c23134",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/client/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_delete_client_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bacd633b-3fed-4f76-b62e-b07833279070",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/client/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_get_admin_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a027b7d6-a63a-490d-9458-4aee3e0f23af",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/admin",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_create_admin_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "603c5068-9e48-4698-b36b-5c90996cdfe4",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/admin",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_update_admin_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "397aa65a-0647-4d61-96cd-c0775feb10ce",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/admin/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"admin",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403_delete_admin_no_permission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e0b85137-a4f1-40b2-9b0c-bb304bd7e014",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"response contains success == False\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"response text contains 'Permission not found.'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.text()).to.include(\"Permission not found.\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/admin/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"admin",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im9LSjBEVXRkcmQtbi0zcGpoRjJLViJ9.eyJpc3MiOiJodHRwczovL2F3ZXNvbWUtYXV0aC5ldS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWVlN2RkZjNjNjVjODcwMDEzOWYxNzdkIiwiYXVkIjoiaGlsbHRvcCIsImlhdCI6MTU5NDU5Mzc0NiwiZXhwIjoxNTk0NjgwMTQ2LCJhenAiOiJMZkxsV3pmYnpiaVRmYjRyM3NVY3JCNjZOMjUycFd5ZiIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZ2V0Om9yZGVyIiwicG9zdDpvcmRlciJdfQ.E6_Kj1KiMdNTKVhZe6i2Axnhb8Q4JYDfHmNLO7Fya6hmJpfl6WwBkV0v3y8JRS9nvB0BS76m6752avGyTArA8FHlmOpkvmKU8Jr73gdNgrx8SXl3gjUbaDVocQ_kVMiMl3HhS_5gmVk0zdl8jMOJXlt4DwRk6yikYAIMdPyz2pNCWJZGGuHWEFXWDzqxHhqjbVOAgXQpN4epaaag_W4mZRpK1bzdalxVgIdSMmY8QUpxwUQcex42-whH98wfkZDBv6xwXU7RhsbwnjfM6Y1LCxZSeJey08t3znCoOOReCzcOu5HyFy4rQmOCcsUGfUcbIeGIZwZKNQNpVRXarqTOKA",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "fda8f148-05a4-4882-b40f-c32e0d4d1b26",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "4951b317-7bb9-4839-a1b5-a1797203405c",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"variable": [
+		{
+			"id": "6a568b8e-eaca-4de1-849a-a40ede005cbc",
+			"key": "host",
+			"value": "localhost:5000",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
