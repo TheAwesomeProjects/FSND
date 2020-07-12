@@ -1,5 +1,7 @@
 # Hilltop Tea Shop
 
+###### version 1.1
+
 Hilltop has decided to popularize the brand on the Baltic countries market and for that reason require an official online shop with 
 international delivery by post service to the client's specified location.
 
@@ -21,6 +23,8 @@ The `./backend` directory contains Flask application with SQLAlchemy module. The
 all the endpoints used in application are specified. api.py references models.py for DB and SQLAlchemy setup. Auth0 is used 
 for authentication.
 
+    The API is accessible on heroku via https://hilltoptea.herokuapp.com/
+
 
 [View the README.md within ./backend for more details.](./backend/README.md)
 
@@ -28,6 +32,8 @@ for authentication.
 
 The `./frontend` directory contains a React frontend to consume the data from the Flask server. 
 
+    Frontend and tea delivery are not included int the first application version
+
 [View the README.md within ./frontend for more details.](./frontend/README.md)
 
-`FRONTEND AND TEA DELIVERY ARE NOT INCLUDED IN THE FIRST APPLICATION VERSION` 
+    

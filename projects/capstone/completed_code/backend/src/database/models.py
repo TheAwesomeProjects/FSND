@@ -1,5 +1,6 @@
 import os
-from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, UniqueConstraint
+from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, \
+    UniqueConstraint
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 
@@ -33,10 +34,13 @@ def setup_db(app, env, database_path=database_path):
     db.app = app
     db.init_app(app)
 
+
 '''
 db_drop_and_create_all()
     drops the database tables and starts fresh
 '''
+
+
 def db_drop_and_create_all():
     db.drop_all()
     db.create_all()
@@ -61,14 +65,15 @@ class Tea(db.Model):
     description = Column(String, nullable=False)
     ingredients = Column(String, nullable=False)
     instruction = Column(String, nullable=True)
-    tea_quantity = Column(Integer, nullable=False)  # available quantity in the shop
+    tea_quantity = Column(Integer, nullable=False)
     tea_orders = db.relationship('Order', backref=db.backref('tea', lazy=True))
 
     __table_args__ = (
         UniqueConstraint('title', name='tea_title_unique_key'),
     )
 
-    def __init__(self, title, tea_type, code, packaging, price, description, ingredients, instruction, tea_quantity):
+    def __init__(self, title, tea_type, code, packaging, price, description,
+                 ingredients, instruction, tea_quantity):
         self.title = title
         self.tea_type = tea_type
         self.code = code
@@ -111,7 +116,8 @@ class Catalog(db.Model):
     id = Column(Integer, primary_key=True)
     tea_category = Column(String, nullable=False)
     tea_packing = Column(String, nullable=False)
-    tea_list = db.relationship('Tea', secondary=tea_catalog, backref=db.backref('catalog', lazy=True))
+    tea_list = db.relationship('Tea', secondary=tea_catalog,
+                               backref=db.backref('catalog', lazy=True))
 
     def __init__(self, tea_category, tea_packing, tea_list):
         self.tea_category = tea_category
@@ -161,7 +167,8 @@ class User(db.Model):
     country = Column(String, nullable=False)
     postal_code = Column(String, nullable=False)
 
-    def __init__(self, name, surname, email, phone, address, city, country, postal_code):
+    def __init__(self, name, surname, email, phone, address,
+                 city, country, postal_code):
         self.name = name
         self.surname = surname
         self.email = email
@@ -177,10 +184,13 @@ class Client(User):
 
     id = Column(Integer, primary_key=True)
     discount = Column(Integer, nullable=True)
-    client_orders = db.relationship('Order', backref=db.backref('client', lazy=True))
+    client_orders = db.relationship('Order',
+                                    backref=db.backref('client', lazy=True))
 
-    def __init__(self, name, surname, email, phone, address, city, country, postal_code, discount, client_orders):
-        super().__init__(name, surname, email, phone, address, city, country, postal_code)
+    def __init__(self, name, surname, email, phone, address, city,
+                 country, postal_code, discount, client_orders):
+        super().__init__(name, surname, email, phone, address, city,
+                         country, postal_code)
         self.discount = discount
         self.client_orders = client_orders
 
@@ -225,8 +235,10 @@ class Admin(User):
 
     id = Column(Integer, primary_key=True)
 
-    def __init__(self, name, surname, email, phone, address, city, country, postal_code):
-        super().__init__(name, surname, email, phone, address, city, country, postal_code)
+    def __init__(self, name, surname, email, phone, address, city,
+                 country, postal_code):
+        super().__init__(name, surname, email, phone, address, city,
+                         country, postal_code)
 
     def insert(self):
         db.session.add(self)
@@ -266,7 +278,8 @@ class Order(db.Model):
     created_date = Column(DateTime(timezone=False), nullable=False)
     delivered_date = Column(DateTime(timezone=False), nullable=True)
 
-    def __init__(self, tea_id, price, quantity, total_price, client_id, status, created_date, delivered_date):
+    def __init__(self, tea_id, price, quantity, total_price, client_id, status,
+                 created_date, delivered_date):
         self.tea_id = tea_id
         self.price = price
         self.quantity = quantity

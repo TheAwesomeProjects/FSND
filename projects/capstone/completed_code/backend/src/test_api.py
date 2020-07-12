@@ -4,7 +4,8 @@ import json
 from flask_sqlalchemy import SQLAlchemy
 
 from .api import create_app
-from .database.models import setup_db, Tea, Catalog, Order, Client, Admin, Company
+from .database.models import setup_db, Tea, Catalog, Order, \
+    Client, Admin, Company
 from dotenv import load_dotenv
 
 
@@ -16,7 +17,8 @@ class HilltopTestCase(unittest.TestCase):
         self.app = create_app(env='TEST')
         self.client = self.app.test_client
         self.database_name = "hilltop_test"
-        self.database_path = "postgres://{}/{}".format('localhost:5432', self.database_name)
+        self.database_path = "postgres://{}/{}".format('localhost:5432',
+                                                       self.database_name)
         setup_db(app=self.app, env='TEST', database_path=self.database_path)
 
         # binds the app to the current context
@@ -28,8 +30,8 @@ class HilltopTestCase(unittest.TestCase):
 
         # get authorized users
         load_dotenv()
-        self.hilltop_admin = os.getenv("HILLTOP_ADMIN")
-        self.hilltop_client = os.getenv("HILLTOP_CLIENT")
+        self.hilltop_adm = os.getenv("HILLTOP_ADMIN")
+        self.hilltop_cln = os.getenv("HILLTOP_CLIENT")
 
         self.new_tea_position = {
             "title": "Hilltop Classic Black Tea",
@@ -162,7 +164,7 @@ class HilltopTestCase(unittest.TestCase):
             "postal_code": "WC-001"
         }
 
-        self.invalid_admin= {
+        self.invalid_admin = {
             "name": None,
             "surname": None,
             "email": None,
@@ -189,7 +191,8 @@ class HilltopTestCase(unittest.TestCase):
             "email": "noreply@gmail.com",
             "requisites": "LVHABA9002320023230023243",
             "phone": "+399 609090909",
-            "description": "Auto-reply email. Hilltop - tea company serving finest tea in the world"
+            "description": "Auto-reply email. Hilltop - tea company "
+                           "serving finest tea in the world"
         }
 
         self.invalid_company_contacts = {
@@ -205,7 +208,8 @@ class HilltopTestCase(unittest.TestCase):
             "email": "autoreply@gmail.com",
             "requisites": "LVHABA9002320023230023243",
             "phone": "+399 609090909",
-            "description": "Auto-reply email. Hilltop - tea company serving finest tea in the world"
+            "description": "Auto-reply email. Hilltop - tea company "
+                           "serving finest tea in the world"
         }
 
     def tearDown(self):
@@ -223,8 +227,10 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['total_positions'], len(data['tea_list']))
 
     def test_create_tea(self):
-        res = self.client().post('/tea', json=self.new_tea_position,
-                                 headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().post('/tea',
+                                 json=self.new_tea_position,
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -233,8 +239,10 @@ class HilltopTestCase(unittest.TestCase):
         self.assertTrue(data['total_positions'])
 
     def test_422_create_tea_not_valid(self):
-        res = self.client().post('/tea', json=self.invalid_tea_position,
-                                 headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().post('/tea',
+                                 json=self.invalid_tea_position,
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
@@ -242,8 +250,10 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['message'], 'unprocessable')
 
     def test_405_create_tea_not_allowed(self):
-        res = self.client().post('/tea/100500', json=self.new_tea_position,
-                                 headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().post('/tea/100500',
+                                 json=self.new_tea_position,
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 405)
@@ -251,8 +261,10 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['message'], 'method not allowed')
 
     def test_patch_tea(self):
-        res = self.client().patch('/tea/2', json=self.update_tea_position,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().patch('/tea/2',
+                                  json=self.update_tea_position,
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -260,8 +272,10 @@ class HilltopTestCase(unittest.TestCase):
         self.assertTrue(data['updated'])
 
     def test_404_patch_tea_not_found(self):
-        res = self.client().patch('/tea/100500', json=self.update_tea_position,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().patch('/tea/100500',
+                                  json=self.update_tea_position,
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -269,8 +283,10 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['message'], 'resource not found')
 
     def test_422_patch_tea_not_valid(self):
-        res = self.client().patch('/tea/2', json=self.invalid_tea_position,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().patch('/tea/2',
+                                  json=self.invalid_tea_position,
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
@@ -278,7 +294,9 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['message'], 'unprocessable')
 
     def test_delete_tea(self):
-        res = self.client().delete('/tea/3', headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().delete('/tea/3',
+                                   headers={'Authorization': 'Bearer ' +
+                                                             self.hilltop_adm})
         data = json.loads(res.data)
 
         tea = Tea.query.filter(Tea.id == 3).one_or_none()
@@ -290,7 +308,9 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(tea, None)
 
     def test_404_delete_tea_not_found(self):
-        res = self.client().delete('/tea/100500', headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().delete('/tea/100500',
+                                   headers={'Authorization': 'Bearer ' +
+                                                             self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -309,7 +329,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_create_catalog(self):
         res = self.client().post('/catalog', json=self.new_catalog,
-                                 headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -319,7 +340,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_422_create_catalog_not_valid(self):
         res = self.client().post('/catalog', json=self.invalid_catalog,
-                                 headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
@@ -328,7 +350,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_405_create_catalog_not_allowed(self):
         res = self.client().post('/catalog/100500', json=self.new_catalog,
-                                 headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 405)
@@ -337,7 +360,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_patch_catalog(self):
         res = self.client().patch('/catalog/3', json=self.update_catalog,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -346,7 +370,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_404_patch_catalog_not_found(self):
         res = self.client().patch('/catalog/100500', json=self.update_catalog,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -355,7 +380,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_422_patch_catalog_not_valid(self):
         res = self.client().patch('/catalog/3', json=self.invalid_catalog,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
@@ -363,7 +389,9 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['message'], 'unprocessable')
 
     def test_delete_catalog(self):
-        res = self.client().delete('/catalog/4', headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().delete('/catalog/4',
+                                   headers={'Authorization': 'Bearer ' +
+                                                             self.hilltop_adm})
         data = json.loads(res.data)
 
         catalog = Catalog.query.filter(Catalog.id == 4).one_or_none()
@@ -375,7 +403,9 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(catalog, None)
 
     def test_404_delete_catalog_not_found(self):
-        res = self.client().delete('/catalog/100500', headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().delete('/catalog/100500',
+                                   headers={'Authorization': 'Bearer ' +
+                                                             self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -383,7 +413,9 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['message'], 'resource not found')
 
     def test_get_order(self):
-        res = self.client().get('/order', headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().get('/order',
+                                headers={'Authorization': 'Bearer ' +
+                                                          self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -393,7 +425,9 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['total_orders'], len(data['orders']))
 
     def test_create_order(self):
-        res = self.client().post('/order', json=self.new_order, headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().post('/order', json=self.new_order,
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -403,7 +437,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_422_create_order_not_valid(self):
         res = self.client().post('/order', json=self.invalid_order,
-                                 headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
@@ -412,7 +447,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_405_create_order_not_allowed(self):
         res = self.client().post('/order/100500', json=self.new_order,
-                                 headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 405)
@@ -421,7 +457,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_patch_order(self):
         res = self.client().patch('/order/3', json=self.update_order,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -430,7 +467,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_404_patch_order_not_found(self):
         res = self.client().patch('/order/100500', json=self.update_order,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -439,7 +477,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_422_patch_order_not_valid(self):
         res = self.client().patch('/order/3', json=self.invalid_order,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
@@ -448,7 +487,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_delete_order(self):
         res = self.client().delete('/order/4',
-                                   headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                   headers={'Authorization': 'Bearer ' +
+                                                             self.hilltop_adm})
         data = json.loads(res.data)
 
         order = Order.query.filter(Order.id == 4).one_or_none()
@@ -460,7 +500,9 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(order, None)
 
     def test_404_delete_order_not_found(self):
-        res = self.client().delete('/order/100500', headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().delete('/order/100500',
+                                   headers={'Authorization': 'Bearer ' +
+                                                             self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -468,7 +510,9 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['message'], 'resource not found')
 
     def test_get_client(self):
-        res = self.client().get('/client', headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().get('/client',
+                                headers={'Authorization': 'Bearer ' +
+                                                          self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -479,7 +523,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_create_client(self):
         res = self.client().post('/client', json=self.new_client,
-                                 headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -489,7 +534,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_422_create_client_not_valid(self):
         res = self.client().post('/client', json=self.invalid_client,
-                                 headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
@@ -498,7 +544,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_405_create_client_not_allowed(self):
         res = self.client().post('/client/100500', json=self.new_client,
-                                 headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 405)
@@ -507,7 +554,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_patch_client(self):
         res = self.client().patch('/client/1', json=self.update_client,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -516,7 +564,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_404_patch_client_not_found(self):
         res = self.client().patch('/client/100500', json=self.update_client,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -525,7 +574,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_422_patch_client_not_valid(self):
         res = self.client().patch('/client/1', json=self.invalid_client,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
@@ -533,7 +583,9 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['message'], 'unprocessable')
 
     def test_delete_client(self):
-        res = self.client().delete('/client/3', headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().delete('/client/3',
+                                   headers={'Authorization': 'Bearer ' +
+                                                             self.hilltop_adm})
         data = json.loads(res.data)
 
         client = Client.query.filter(Client.id == 3).one_or_none()
@@ -545,7 +597,9 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(client, None)
 
     def test_404_delete_client_not_found(self):
-        res = self.client().delete('/client/100500', headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().delete('/client/100500',
+                                   headers={'Authorization': 'Bearer ' +
+                                                             self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -553,7 +607,9 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['message'], 'resource not found')
 
     def test_get_admin(self):
-        res = self.client().get('/admin', headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().get('/admin',
+                                headers={'Authorization': 'Bearer ' +
+                                                          self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -563,7 +619,9 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['total_admins'], len(data['admins']))
 
     def test_create_admin(self):
-        res = self.client().post('/admin', json=self.new_admin, headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().post('/admin', json=self.new_admin,
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -573,7 +631,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_422_create_admin_not_valid(self):
         res = self.client().post('/admin', json=self.invalid_admin,
-                                 headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
@@ -582,7 +641,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_405_create_admin_not_allowed(self):
         res = self.client().post('/admin/100500', json=self.new_admin,
-                                 headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 405)
@@ -591,7 +651,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_patch_admin(self):
         res = self.client().patch('/admin/1', json=self.update_admin,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -600,7 +661,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_404_patch_admin_not_found(self):
         res = self.client().patch('/admin/100500', json=self.update_admin,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -609,7 +671,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_422_patch_admin_not_valid(self):
         res = self.client().patch('/admin/1', json=self.invalid_admin,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
@@ -617,7 +680,9 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['message'], 'unprocessable')
 
     def test_delete_admin(self):
-        res = self.client().delete('/admin/2', headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().delete('/admin/2',
+                                   headers={'Authorization': 'Bearer ' +
+                                                             self.hilltop_adm})
         data = json.loads(res.data)
 
         admin = Admin.query.filter(Admin.id == 2).one_or_none()
@@ -629,7 +694,9 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(admin, None)
 
     def test_404_delete_admin_not_found(self):
-        res = self.client().delete('/admin/100500', headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().delete('/admin/100500',
+                                   headers={'Authorization': 'Bearer ' +
+                                                             self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -644,11 +711,14 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertTrue(data['company_contacts'])
         self.assertTrue(len(data['company_contacts']))
-        self.assertEqual(data['total_company_contacts'], len(data['company_contacts']))
+        self.assertEqual(data['total_company_contacts'],
+                         len(data['company_contacts']))
 
     def test_create_company_contacts(self):
-        res = self.client().post('/company_contacts', json=self.new_company_contacts,
-                                 headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().post('/company_contacts',
+                                 json=self.new_company_contacts,
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -657,8 +727,10 @@ class HilltopTestCase(unittest.TestCase):
         self.assertTrue(data['total_company_contacts'])
 
     def test_422_create_company_contacts_not_valid(self):
-        res = self.client().post('/company_contacts', json=self.invalid_company_contacts,
-                                 headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().post('/company_contacts',
+                                 json=self.invalid_company_contacts,
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
@@ -666,8 +738,10 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['message'], 'unprocessable')
 
     def test_405_create_company_contacts_not_allowed(self):
-        res = self.client().post('/company_contacts/100500', json=self.new_company_contacts,
-                                 headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().post('/company_contacts/100500',
+                                 json=self.new_company_contacts,
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 405)
@@ -675,8 +749,10 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['message'], 'method not allowed')
 
     def test_patch_company_contacts(self):
-        res = self.client().patch('/company_contacts/1', json=self.update_company_contacts,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().patch('/company_contacts/1',
+                                  json=self.update_company_contacts,
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -684,8 +760,10 @@ class HilltopTestCase(unittest.TestCase):
         self.assertTrue(data['updated'])
 
     def test_404_patch_company_contacts_not_found(self):
-        res = self.client().patch('/company_contacts/100500', json=self.update_company_contacts,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().patch('/company_contacts/100500',
+                                  json=self.update_company_contacts,
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -693,8 +771,10 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['message'], 'resource not found')
 
     def test_422_patch_company_contacts_not_valid(self):
-        res = self.client().patch('/company_contacts/1', json=self.invalid_company_contacts,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_admin})
+        res = self.client().patch('/company_contacts/1',
+                                  json=self.invalid_company_contacts,
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 422)
@@ -703,7 +783,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_delete_company_contacts(self):
         res = self.client().delete('/company_contacts/2',
-                                   headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                   headers={'Authorization': 'Bearer ' +
+                                                             self.hilltop_adm})
         data = json.loads(res.data)
 
         company_contacts = Company.query.filter(Company.id == 2).one_or_none()
@@ -716,7 +797,8 @@ class HilltopTestCase(unittest.TestCase):
 
     def test_404_delete_company_contacts_not_found(self):
         res = self.client().delete('/company_contacts/100500',
-                                   headers={'Authorization': 'Bearer '+self.hilltop_admin})
+                                   headers={'Authorization': 'Bearer ' +
+                                                             self.hilltop_adm})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -724,7 +806,9 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['message'], 'resource not found')
 
     def test_client_get_order(self):
-        res = self.client().get('/order', headers={'Authorization': 'Bearer '+self.hilltop_client})
+        res = self.client().get('/order',
+                                headers={'Authorization': 'Bearer ' +
+                                                          self.hilltop_cln})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -734,8 +818,10 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['total_orders'], len(data['orders']))
 
     def test_client_create_order(self):
-        res = self.client().post('/order', json=self.new_order,
-                                 headers={'Authorization': 'Bearer '+self.hilltop_client})
+        res = self.client().post('/order',
+                                 json=self.new_order,
+                                 headers={'Authorization': 'Bearer ' +
+                                                           self.hilltop_cln})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -744,8 +830,10 @@ class HilltopTestCase(unittest.TestCase):
         self.assertTrue(data['total_orders'])
 
     def test_client_patch_company_contacts(self):
-        res = self.client().patch('/company_contacts/1', json=self.update_company_contacts,
-                                  headers={'Authorization': 'Bearer '+self.hilltop_client})
+        res = self.client().patch('/company_contacts/1',
+                                  json=self.update_company_contacts,
+                                  headers={'Authorization': 'Bearer ' +
+                                                            self.hilltop_cln})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 403)
@@ -753,7 +841,8 @@ class HilltopTestCase(unittest.TestCase):
         self.assertEqual(data['message'], 'Permission not found.')
 
     def test_no_auth_patch_company_contacts(self):
-        res = self.client().patch('/company_contacts/1', json=self.update_company_contacts)
+        res = self.client().patch('/company_contacts/1',
+                                  json=self.update_company_contacts)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 401)

@@ -4,7 +4,7 @@
 - Returns a success value, list of tea positions in the store and a total number of positions
 - Request arguments: None
 
-Sample: ``` curl http://127.0.0.1:5000/tea ```
+Sample: ``` curl https://hilltoptea.herokuapp.com/tea ```
 ```
 {
   "success": true,
@@ -24,7 +24,7 @@ Sample: ``` curl http://127.0.0.1:5000/tea ```
 - Returns a success value, id of new tea position and a total number of positions in store
 - Request arguments: json with new tea position fields filled
 
-Sample: ``` curl http://127.0.0.1:5000/tea -X POST -H "Content-Type: application/json" -d
+Sample: ``` curl https://hilltoptea.herokuapp.com/tea -X POST -H "Content-Type: application/json" -d
 '{
     "title": "Hilltop Classic Black Tea",
     "tea_type": "Black Tea",
@@ -45,12 +45,12 @@ Sample: ``` curl http://127.0.0.1:5000/tea -X POST -H "Content-Type: application
 }
 ```
 
-##### PATCH ```http://127.0.0.1:5000/tea/<id>```
+##### PATCH ```/tea/<id>```
 - Updates existing tea position in the store
 - Returns a success value and updated tea position
 - Request arguments: json with tea position fields filled
 
-Sample: ``` curl http://127.0.0.1:5000/tea/4 -X PATCH -H "Content-Type: application/json" -d
+Sample: ``` curl https://hilltoptea.herokuapp.com/tea/4 -X PATCH -H "Content-Type: application/json" -d
 '{
     "title": "Hilltop English Breakfast Black Tea",
     "tea_type": "Black Tea",
@@ -81,12 +81,12 @@ Sample: ``` curl http://127.0.0.1:5000/tea/4 -X PATCH -H "Content-Type: applicat
 }
 ```
 
-##### DELETE ```http://127.0.0.1:5000/tea/<id>```
+##### DELETE ```/tea/<id>```
 - Deletes existing tea position
 - Returns a success value, id of deleted tea position and a total number of positions left in store
 - Request arguments: None
 
-Sample: ``` curl http://127.0.0.1:5000/tea/4 -X DELETE ```
+Sample: ``` curl https://hilltoptea.herokuapp.com/tea/4 -X DELETE ```
 
 ```
 {
@@ -100,7 +100,7 @@ Sample: ``` curl http://127.0.0.1:5000/tea/4 -X DELETE ```
 - Returns a success value, list of tea categories in catalog, list of tea positions per category and a total number of records in catalog
 - Request arguments: None
 
-Sample: ``` curl http://127.0.0.1:5000/catalog ```
+Sample: ``` curl https://hilltoptea.herokuapp.com/catalog ```
 ```
 {
     "success": true,
@@ -177,7 +177,7 @@ Sample: ``` curl http://127.0.0.1:5000/catalog ```
 - Returns a success value, id of new catalog record and a total number of records in catalog
 - Request arguments: json with new tea category and packing information
 
-Sample: ``` curl http://127.0.0.1:5000/catalog -X POST -H "Content-Type: application/json" -d
+Sample: ``` curl https://hilltoptea.herokuapp.com/catalog -X POST -H "Content-Type: application/json" -d
 '{
     "tea_category": "Green Fruit Tea",
     "tea_packing": "200g"
@@ -191,12 +191,12 @@ Sample: ``` curl http://127.0.0.1:5000/catalog -X POST -H "Content-Type: applica
 }
 ```
 
-##### PATCH ```http://127.0.0.1:5000/catalog/<id>```
+##### PATCH ```/catalog/<id>```
 - Updates existing tea catalog record
 - Returns a success value and updated tea catalog record
 - Request arguments: json with tea category and packing information
 
-Sample: ``` curl http://127.0.0.1:5000/catalog/5 -X PATCH -H "Content-Type: application/json" -d
+Sample: ``` curl https://hilltoptea.herokuapp.com/catalog/5 -X PATCH -H "Content-Type: application/json" -d
 '{
     "tea_category": "Green Sour Sop Tea",
     "tea_packing": "200g"
@@ -214,12 +214,12 @@ Sample: ``` curl http://127.0.0.1:5000/catalog/5 -X PATCH -H "Content-Type: appl
 }
 ```
 
-##### DELETE ```http://127.0.0.1:5000/catalog/<id>```
+##### DELETE ```/catalog/<id>```
 - Deletes existing tea catalog record
 - Returns a success value, id of deleted tea catalog record and a total number of records in catalog
 - Request arguments: None
 
-Sample: ``` curl http://127.0.0.1:5000/catalog/5 -X DELETE ```
+Sample: ``` curl https://hilltoptea.herokuapp.com/catalog/5 -X DELETE ```
 
 ```
 {
@@ -233,7 +233,7 @@ Sample: ``` curl http://127.0.0.1:5000/catalog/5 -X DELETE ```
 - Returns a success value and list of tea orders received by the store
 - Request arguments: None
 
-Sample: ``` curl http://127.0.0.1:5000/order ```
+Sample: ``` curl https://hilltoptea.herokuapp.com/order ```
 ```
 {
     "success": true,
@@ -292,7 +292,7 @@ Sample: ``` curl http://127.0.0.1:5000/order ```
 - Returns a success value, id of new order and a total number of orders received by the store
 - Request arguments: json with new order fields filled
 
-Sample: ``` curl http://127.0.0.1:5000/order -X POST -H "Content-Type: application/json" -d
+Sample: ``` curl https://hilltoptea.herokuapp.com/order -X POST -H "Content-Type: application/json" -d
 '{
     "tea_id": 3,
     "price": "2.70",
@@ -311,12 +311,12 @@ Sample: ``` curl http://127.0.0.1:5000/order -X POST -H "Content-Type: applicati
 }
 ```
 
-##### PATCH ```http://127.0.0.1:5000/order/<id>```
+##### PATCH ```/order/<id>```
 - Updates existing tea order
 - Returns a success value and updated tea order record
 - Request arguments: json with order fields filled
 
-Sample: ``` curl http://127.0.0.1:5000/order/5 -X PATCH -H "Content-Type: application/json" -d
+Sample: ``` curl https://hilltoptea.herokuapp.com/order/5 -X PATCH -H "Content-Type: application/json" -d
 '{
     "tea_id": 1,
     "price": "2.50",
@@ -345,12 +345,12 @@ Sample: ``` curl http://127.0.0.1:5000/order/5 -X PATCH -H "Content-Type: applic
 }
 ```
 
-##### DELETE ```http://127.0.0.1:5000/order/<id>```
+##### DELETE ```/order/<id>```
 - Deletes existing order record
 - Returns a success value, id of deleted order record and a total number of orders in the store
 - Request arguments: None
 
-Sample: ``` curl http://127.0.0.1:5000/order/5 -X DELETE ```
+Sample: ``` curl https://hilltoptea.herokuapp.com/order/5 -X DELETE ```
 
 ```
 {
@@ -364,7 +364,7 @@ Sample: ``` curl http://127.0.0.1:5000/order/5 -X DELETE ```
 - Returns a success value, list of clients, client orders and a total number of clients in the store
 - Request arguments: None
 
-Sample: ``` curl http://127.0.0.1:5000/client ```
+Sample: ``` curl https://hilltoptea.herokuapp.com/client ```
 ```
 {
     "success": true,
@@ -460,7 +460,7 @@ Sample: ``` curl http://127.0.0.1:5000/client ```
 - Returns a success value, id of new client and a total number of clients in the store
 - Request arguments: json with new client fields filled
 
-Sample: ``` curl http://127.0.0.1:5000/client -X POST -H "Content-Type: application/json" -d
+Sample: ``` curl https://hilltoptea.herokuapp.com/client -X POST -H "Content-Type: application/json" -d
 '{
     "name": "John",
     "surname": "Snow",
@@ -481,12 +481,12 @@ Sample: ``` curl http://127.0.0.1:5000/client -X POST -H "Content-Type: applicat
 }
 ```
 
-##### PATCH ```http://127.0.0.1:5000/client/<id>```
+##### PATCH ```/client/<id>```
 - Updates existing client information
 - Returns a success value and updated client record
 - Request arguments: json with client fields filled
 
-Sample: ``` curl http://127.0.0.1:5000/client/4 -X PATCH -H "Content-Type: application/json" -d
+Sample: ``` curl https://hilltoptea.herokuapp.com/client/4 -X PATCH -H "Content-Type: application/json" -d
 '{
     "name": "John",
     "surname": "Snow",
@@ -518,12 +518,12 @@ Sample: ``` curl http://127.0.0.1:5000/client/4 -X PATCH -H "Content-Type: appli
 }
 ```
 
-##### DELETE ```http://127.0.0.1:5000/client/<id>```
+##### DELETE ```/client/<id>```
 - Deletes existing client record
 - Returns a success value, id of deleted client record and a total number of clients in the store
 - Request arguments: None
 
-Sample: ``` curl http://127.0.0.1:5000/client/4 -X DELETE ```
+Sample: ``` curl https://hilltoptea.herokuapp.com/client/4 -X DELETE ```
 
 ```
 {
@@ -537,7 +537,7 @@ Sample: ``` curl http://127.0.0.1:5000/client/4 -X DELETE ```
 - Returns a success value, list of admins and a total number of admins in the store
 - Request arguments: None
 
-Sample: ``` curl http://127.0.0.1:5000/admin ```
+Sample: ``` curl https://hilltoptea.herokuapp.com/admin ```
 ```
 {
     "success": true,
@@ -574,7 +574,7 @@ Sample: ``` curl http://127.0.0.1:5000/admin ```
 - Returns a success value, id of new admin and a total number of admins in the store
 - Request arguments: json with new admin fields filled
 
-Sample: ``` curl http://127.0.0.1:5000/admin -X POST -H "Content-Type: application/json" -d
+Sample: ``` curl https://hilltoptea.herokuapp.com/admin -X POST -H "Content-Type: application/json" -d
 '{
     "name": "Cersei",
     "surname": "Lannister",
@@ -594,12 +594,12 @@ Sample: ``` curl http://127.0.0.1:5000/admin -X POST -H "Content-Type: applicati
 }
 ```
 
-##### PATCH ```http://127.0.0.1:5000/admin/<id>```
+##### PATCH ```/admin/<id>```
 - Updates existing admin information
 - Returns a success value and updated admin record
 - Request arguments: json with admin fields filled
 
-Sample: ``` curl http://127.0.0.1:5000/admin/3 -X PATCH -H "Content-Type: application/json" -d
+Sample: ``` curl https://hilltoptea.herokuapp.com/admin/3 -X PATCH -H "Content-Type: application/json" -d
 '{
     "name": "Tyrion",
     "surname": "Lannister",
@@ -628,12 +628,12 @@ Sample: ``` curl http://127.0.0.1:5000/admin/3 -X PATCH -H "Content-Type: applic
 }
 ```
 
-##### DELETE ```http://127.0.0.1:5000/admin/<id>```
+##### DELETE ```/admin/<id>```
 - Deletes existing admin record
 - Returns a success value, id of deleted admin record and a total number of admins in the store
 - Request arguments: None
 
-Sample: ``` curl http://127.0.0.1:5000/admin/3 -X DELETE ```
+Sample: ``` curl https://hilltoptea.herokuapp.com/admin/3 -X DELETE ```
 
 ```
 {
@@ -647,7 +647,7 @@ Sample: ``` curl http://127.0.0.1:5000/admin/3 -X DELETE ```
 - Returns a success value, contact information records and a total number of records
 - Request arguments: None
 
-Sample: ``` curl http://127.0.0.1:5000/company_contacts ```
+Sample: ``` curl https://hilltoptea.herokuapp.com/company_contacts ```
 ```
 {
     "success": true,
@@ -676,7 +676,7 @@ Sample: ``` curl http://127.0.0.1:5000/company_contacts ```
 - Returns a success value, id of contact information record and a total number of records
 - Request arguments: json with new contact information record fields filled
 
-Sample: ``` curl http://127.0.0.1:5000/company_contacts -X POST -H "Content-Type: application/json" -d
+Sample: ``` curl https://hilltoptea.herokuapp.com/company_contacts -X POST -H "Content-Type: application/json" -d
 '{
     "email": "noreply@gmail.com",
     "requisites": "LVHABA9002320023230023243",
@@ -692,12 +692,12 @@ Sample: ``` curl http://127.0.0.1:5000/company_contacts -X POST -H "Content-Type
 }
 ```
 
-##### PATCH ```http://127.0.0.1:5000/company_contacts/<id>```
+##### PATCH ```/company_contacts/<id>```
 - Updates existing contact information record
 - Returns a success value and updated contact information record
 - Request arguments: json with contact information record fields filled
 
-Sample: ``` curl http://127.0.0.1:5000/company_contacts/3 -X PATCH -H "Content-Type: application/json" -d
+Sample: ``` curl https://hilltoptea.herokuapp.com/company_contacts/3 -X PATCH -H "Content-Type: application/json" -d
 '{
     "email": "autoreply@gmail.com",
     "requisites": "LVHABA9002320023230023243",
@@ -718,12 +718,12 @@ Sample: ``` curl http://127.0.0.1:5000/company_contacts/3 -X PATCH -H "Content-T
 }
 ```
 
-##### DELETE ```http://127.0.0.1:5000/company_contacts/<id>```
+##### DELETE ```/company_contacts/<id>```
 - Deletes existing contact information record
 - Returns a success value, id of deleted contact information record and a total number of contact records left
 - Request arguments: None
 
-Sample: ``` curl http://127.0.0.1:5000/company_contacts/3 -X DELETE ```
+Sample: ``` curl https://hilltoptea.herokuapp.com/company_contacts/3 -X DELETE ```
 
 ```
 {

@@ -5,7 +5,8 @@ from flask import Flask, request, jsonify, abort
 from flask_migrate import Migrate
 from flask_cors import CORS
 
-from .database.models import setup_db, db, Tea, Catalog, Order, Client, Admin, Company
+from .database.models import setup_db, db, Tea, Catalog, Order, Client, \
+    Admin, Company
 from .auth.auth import requires_auth, AuthError
 
 
@@ -18,8 +19,10 @@ def create_app(env='PROD'):
 
     @app.after_request
     def after_request(response):
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-        response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE')
+        response.headers.add('Access-Control-Allow-Headers',
+                             'Content-Type, Authorization')
+        response.headers.add('Access-Control-Allow-Methods',
+                             'GET, POST, PATCH, DELETE')
         return response
 
     # ROUTES
@@ -50,12 +53,13 @@ def create_app(env='PROD'):
         new_description = body.get('description', None)
         new_ingredients = body.get('ingredients', None)
         new_instruction = body.get('instruction', None)
-        new_tea_quantity = body.get('tea_quantity', None)
+        new_quantity = body.get('tea_quantity', None)
 
         try:
-            tea = Tea(title=new_title, tea_type=new_tea_type, code=new_code, packaging=new_packaging, price=new_price,
-                      description=new_description, ingredients=new_ingredients, instruction=new_instruction,
-                      tea_quantity=new_tea_quantity)
+            tea = Tea(title=new_title, tea_type=new_tea_type, code=new_code,
+                      packaging=new_packaging, price=new_price,
+                      description=new_description, ingredients=new_ingredients,
+                      instruction=new_instruction, tea_quantity=new_quantity)
             tea.insert()
 
             return jsonify({
@@ -81,7 +85,7 @@ def create_app(env='PROD'):
             new_description = body.get('description', None)
             new_ingredients = body.get('ingredients', None)
             new_instruction = body.get('instruction', None)
-            new_tea_quantity = body.get('tea_quantity', None)
+            new_quantity = body.get('tea_quantity', None)
 
             tea = Tea.query.filter(Tea.id == id).one_or_none()
 
@@ -96,7 +100,7 @@ def create_app(env='PROD'):
             tea.description = new_description
             tea.ingredients = new_ingredients
             tea.instruction = new_instruction
-            tea.tea_quantity = new_tea_quantity
+            tea.tea_quantity = new_quantity
 
             tea.update()
 
@@ -135,6 +139,7 @@ def create_app(env='PROD'):
                 abort(422, e)
 
     @app.route('/catalog', methods=['GET'])
+    @app.route('/', methods=['GET'])
     def get_catalog():
         catalog = Catalog.query.order_by(Catalog.id).all()
 
@@ -156,7 +161,8 @@ def create_app(env='PROD'):
         new_tea_packing = body.get('tea_packing', None)
 
         try:
-            catalog = Catalog(tea_category=new_tea_category, tea_packing=new_tea_packing, tea_list=[])
+            catalog = Catalog(tea_category=new_tea_category,
+                              tea_packing=new_tea_packing, tea_list=[])
             catalog.insert()
 
             return jsonify({
@@ -247,8 +253,10 @@ def create_app(env='PROD'):
         new_delivered_date = body.get('delivered_date', None)
 
         try:
-            order = Order(tea_id=new_tea_id, price=new_price, quantity=new_quantity, total_price=new_total_price,
-                          client_id=new_client_id, status=new_status, created_date=new_created_date,
+            order = Order(tea_id=new_tea_id, price=new_price,
+                          quantity=new_quantity, total_price=new_total_price,
+                          client_id=new_client_id, status=new_status,
+                          created_date=new_created_date,
                           delivered_date=new_delivered_date)
             order.insert()
 
@@ -353,9 +361,11 @@ def create_app(env='PROD'):
         new_discount = body.get('discount', None)
 
         try:
-            client = Client(name=new_name, surname=new_surname, email=new_email, phone=new_phone, address=new_address,
-                            city=new_city, country=new_country, postal_code=new_postal_code, discount=new_discount,
-                            client_orders=[])
+            client = Client(name=new_name, surname=new_surname,
+                            email=new_email, phone=new_phone,
+                            address=new_address, city=new_city,
+                            country=new_country, postal_code=new_postal_code,
+                            discount=new_discount, client_orders=[])
             client.insert()
 
             return jsonify({
@@ -460,8 +470,10 @@ def create_app(env='PROD'):
         new_postal_code = body.get('postal_code', None)
 
         try:
-            admin = Admin(name=new_name, surname=new_surname, email=new_email, phone=new_phone, address=new_address,
-                          city=new_city, country=new_country, postal_code=new_postal_code)
+            admin = Admin(name=new_name, surname=new_surname,
+                          email=new_email, phone=new_phone,
+                          address=new_address, city=new_city,
+                          country=new_country, postal_code=new_postal_code)
             admin.insert()
 
             return jsonify({
@@ -549,7 +561,8 @@ def create_app(env='PROD'):
 
         return jsonify({
             'success': True,
-            'company_contacts': [contacts.format() for contacts in company_contacts],
+            'company_contacts': [contacts.format() for contacts
+                                 in company_contacts],
             'total_company_contacts': len(company_contacts)
         })
 
@@ -564,7 +577,9 @@ def create_app(env='PROD'):
         new_description = body.get('description', None)
 
         try:
-            company_contacts = Company(email=new_email, requisites=new_requisites, phone=new_phone,
+            company_contacts = Company(email=new_email,
+                                       requisites=new_requisites,
+                                       phone=new_phone,
                                        description=new_description)
             company_contacts.insert()
 
@@ -588,21 +603,21 @@ def create_app(env='PROD'):
             new_phone = body.get('phone', None)
             new_description = body.get('description', None)
 
-            company_contacts = Company.query.filter(Company.id == id).one_or_none()
+            contacts = Company.query.filter(Company.id == id).one_or_none()
 
-            if company_contacts is None:
+            if contacts is None:
                 abort(404)
 
-            company_contacts.email = new_email
-            company_contacts.requisites = new_requisites
-            company_contacts.phone = new_phone
-            company_contacts.description = new_description
+            contacts.email = new_email
+            contacts.requisites = new_requisites
+            contacts.phone = new_phone
+            contacts.description = new_description
 
-            company_contacts.update()
+            contacts.update()
 
             return jsonify({
                 "success": True,
-                "updated": company_contacts.format()
+                "updated": contacts.format()
             })
 
         except Exception as e:
@@ -615,12 +630,12 @@ def create_app(env='PROD'):
     @requires_auth('detele:company_contacts')
     def delete_company_contacts(payload, id):
         try:
-            company_contacts = Company.query.filter(Company.id == id).one_or_none()
+            contacts = Company.query.filter(Company.id == id).one_or_none()
 
-            if company_contacts is None:
+            if contacts is None:
                 abort(404)
 
-            company_contacts.delete()
+            contacts.delete()
 
             return jsonify({
                 "success": True,
@@ -641,7 +656,9 @@ def create_app(env='PROD'):
         return jsonify({
             "success": False,
             "error": 404,
-            "message": str(error.description) if env == 'DEV' else "resource not found"
+            "message":
+                str(error.description) if env == 'DEV'
+                else "resource not found"
         }), 404
 
     @app.errorhandler(422)
@@ -649,7 +666,8 @@ def create_app(env='PROD'):
         return jsonify({
             "success": False,
             "error": 422,
-            "message": str(error.description) if env == 'DEV' else "unprocessable"
+            "message":
+                str(error.description) if env == 'DEV' else "unprocessable"
         }), 422
 
     @app.errorhandler(405)
@@ -657,23 +675,27 @@ def create_app(env='PROD'):
         return jsonify({
             "success": False,
             "error": 405,
-            "message": str(error.description) if env == 'DEV' else "method not allowed"
+            "message":
+                str(error.description) if env == 'DEV'
+                else "method not allowed"
           }), 405
 
     @app.errorhandler(500)
     def internal_error(error):
         return jsonify({
-          "success": False,
-          "error": 500,
-          "message": str(error.description) if env == 'DEV' else "internal server error"
+            "success": False,
+            "error": 500,
+            "message":
+                str(error.description) if env == 'DEV'
+                else "internal server error"
           }), 500
 
     @app.errorhandler(AuthError)
     def auth_error(error):
         return jsonify({
-          "success": False,
-          "error": error.status_code,
-          "message": error.error['description']
+            "success": False,
+            "error": error.status_code,
+            "message": error.error['description']
           }), error.status_code
 
     return app
